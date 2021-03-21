@@ -16,7 +16,7 @@ tutorial.
 . A copy of the main branch of {uri-git-repo}[this Git repository].
 You can get it by typing the following command in a terminal session:
 +
-	$ curl -L https://raw.githubusercontent.com/paulojeronimo/aws-lambda-labs/main/download.sh | bash
+	$ . <(curl -sSL https://raw.githubusercontent.com/paulojeronimo/aws-lambda-labs/main/download.sh)
 +
 . {uri-aws-cli}[aws-cli] installed.
 . A configured IAM user ID (12 digits number) inside a file called
