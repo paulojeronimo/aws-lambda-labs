@@ -1,0 +1,10 @@
+mkdir-runtime-tutorial-dir.sh
+cd-runtime-tutorial.sh
+create-bootstrap-file.sh
+create-function_sh-file.sh
+change-files-permissions.sh
+create-functions_zip-file.sh
+aws-lambda-create-function.sh
+aws-lambda-invoke.sh
+cat-response_txt.sh
+aws-lambda-delete-function.sh
