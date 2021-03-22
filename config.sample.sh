@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-IAM=123456789012
+export IAM=${IAM:-229248205759}

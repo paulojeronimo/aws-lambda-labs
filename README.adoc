@@ -5,10 +5,13 @@
 
 :uri-git-repo: https://github.com/paulojeronimo/aws-lambda-labs
 :uri-aws-cli: https://aws.amazon.com/cli/
-:uri-runtimes-walthrough: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-walkthrough.html
+:uri-runtimes-walkthrough: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-walkthrough.html
+:uri-runtimes-api: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-api.html
+:uri-runtimes-custom: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-custom.html
+:uri-lambda-runtimes: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
 
 In this lab, we’ll be following the steps presented in the
-{uri-runtimes-walthrough}["Publishing a custom runtime"] Amazon
+{uri-runtimes-walkthrough}["Publishing a custom runtime"] Amazon
 tutorial.
 
 == Prerequisites
@@ -16,7 +19,7 @@ tutorial.
 . A copy of the main branch of {uri-git-repo}[this Git repository].
 You can get it by typing the following command in a terminal session:
 +
-	$ . <(curl -sSL https://raw.githubusercontent.com/paulojeronimo/aws-lambda-labs/main/download.sh)
+	$ source <(curl -sSL https://raw.githubusercontent.com/paulojeronimo/aws-lambda-labs/main/download.sh)
 +
 . {uri-aws-cli}[aws-cli] installed.
 . A configured IAM user ID (12 digits number) inside a file called
@@ -48,7 +51,7 @@ The steps that we’ll be following can be shown by running the following
 command:
 
 ----
-$ ./show-steps.sh
+$ ./show-steps.sh | less
 ----
 
 We can run each step manually or run all at once by typing the following
@@ -57,3 +60,11 @@ command:
 ----
 $ ./run-all-steps.sh
 ----
+
+== References
+
+* {uri-runtimes-walkthrough}
+* {uri-runtimes-api}
+* {uri-runtimes-custom}
+** https://github.com/awslabs/aws-lambda-cpp
+* {uri-lambda-runtimes}

@@ -1,20 +1,8 @@
 #!/usr/bin/env bash
 set -eou pipefail
+BASE_DIR=`cd "$(dirname "$0")"; pwd`
+cd "$BASE_DIR"
 
-echo "---- Step 1: load your environment variables ----"
-echo "$ source ./config.sh"
-echo
+source ./common.sh
 
-echo "---- Step 2: create a build directory and change to it ----"
-echo "$ mkdir -p build && cd \$_"
-echo
-
-count=3
-while read step
-do
-	echo "---- Step $count: ($step) ----"
-	echo -n "$ "
-	cat steps/$step
-	echo
-	(( ++count ))
-done < steps/order.txt
+for-each-step print-step
