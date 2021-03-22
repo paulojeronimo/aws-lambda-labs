@@ -2,9 +2,7 @@
 # Blank lines or lines started with a '#' will be ignored
 
 cleanup.sh
-
 source-config-file.sh
-
 create-build-dir-and-cd-to-it.sh
 create-runtime-tutorial-dir-and-cd-to-it.sh
 create-bootstrap-file.sh
@@ -12,12 +10,10 @@ create-function_sh-file.sh
 change-files-permissions.sh
 create-functions_zip-file.sh
 create-trust-policy_json-file.sh
-
 aws-iam-create-role.sh
 aws-iam-attach-role-policy.sh
 #show-context.sh
 aws-lambda-create-function.sh
 aws-lambda-invoke.sh
-
 cat-response_txt.sh
 create-cleanup_needed-file.sh
