@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<meta name="author" content="Paulo Jerônimo &lt;pj@paulojeronimo.com&gt;, 2021-03-23 07:27:17 -0300">
+<meta name="author" content="Paulo Jerônimo &lt;pj@paulojeronimo.com&gt;, 2021-03-23 11:26:16 -0300">
 <title>AWS Lambda Labs</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -442,39 +442,41 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>AWS Lambda Labs</h1>
 <div class="details">
-<span id="author" class="author">Paulo Jerônimo &lt;pj@paulojeronimo.com&gt;, 2021-03-23 07:27:17 -0300</span><br>
+<span id="author" class="author">Paulo Jerônimo &lt;pj@paulojeronimo.com&gt;, 2021-03-23 11:26:16 -0300</span><br>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#prerequisites">1. Prerequisites</a></li>
-<li><a href="#available-labs">2. Available labs</a>
+<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#prerequisites">2. Prerequisites</a></li>
+<li><a href="#available-labs">3. Available labs</a>
 <ul class="sectlevel2">
-<li><a href="#runtime-tutorial">2.1. runtime-tutorial</a></li>
-<li><a href="#lambda-with-kinesis">2.2. lambda-with-kinesis</a></li>
+<li><a href="#runtime-tutorial">3.1. runtime-tutorial</a></li>
+<li><a href="#lambda-with-kinesis">3.2. lambda-with-kinesis</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div id="preamble">
+<div class="sect1">
+<h2 id="introduction"><a class="anchor" href="#introduction"></a>1. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In these labs, we’ll be following the steps presented in some AWS Lambda
-tutorials available on the Amazon website.
-The main difference here is that I created some scripts that allow us
-to execute some steps in a more command-line fluent way.</p>
+<p>In these labs, we’ll be following the steps presented in some
+<a href="https://aws.amazon.com/lambda/" target="_blank" rel="noopener">AWS Lambda</a> tutorials available on the Amazon website.  The main
+difference here is that I created some scripts that allow us to execute
+some steps in a more command-line fluent way.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="prerequisites">1. Prerequisites</h2>
+<h2 id="prerequisites"><a class="anchor" href="#prerequisites"></a>2. Prerequisites</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>A copy of the main branch of <a href="https://github.com/paulojeronimo/aws-lambda-labs">this Git repository</a>.
+<p>A copy of the main branch of <a href="https://github.com/paulojeronimo/aws-lambda-labs" target="_blank" rel="noopener">this Git repository</a>.
 You can get it by typing the following command in a terminal session:</p>
 <div class="literalblock">
 <div class="content">
@@ -483,12 +485,37 @@ You can get it by typing the following command in a terminal session:</p>
 </div>
 </li>
 <li>
-<p><a href="https://aws.amazon.com/cli/">aws-cli</a> installed.</p>
+<p>Bash version 5 installed.</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you are using a macOS environment, upgrade your Bash version
+following <a href="https://www.shell-tips.com/mac/upgrade-bash/">these steps</a> or by typing the following
+commands:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ brew upgrade &amp;&amp; brew install bash
+$ echo $(brew --prefix)/bin/bash | sudo tee -a /private/etc/shells</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p><a href="https://aws.amazon.com/cli/" target="_blank" rel="noopener">aws-cli</a> installed.</p>
 </li>
 <li>
 <p>A configured IAM user ID (12 digits number) inside a file called
-  <code>config.sh</code> (copy the file <a href="config.sample.sh" class="bare">config.sample.sh</a> to it and edit the
-<code>IAM</code> variable).</p>
+  <code>config.sh</code> (copy the file <a href="https://raw.githubusercontent.com/paulojeronimo/aws-lambda-labs/main/config.sample.sh" target="_blank" rel="noopener">config.sample.sh</a>
+to it and edit the <code>IAM</code> variable).</p>
 </li>
 </ol>
 </div>
@@ -524,12 +551,19 @@ aws-cli/2.1.30 Python/3.9.2 Darwin/20.3.0 source/x86_64 prompt/off</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="available-labs">2. Available labs</h2>
+<h2 id="available-labs"><a class="anchor" href="#available-labs"></a>3. Available labs</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="runtime-tutorial">2.1. runtime-tutorial</h3>
+<h3 id="runtime-tutorial"><a class="anchor" href="#runtime-tutorial"></a>3.1. runtime-tutorial</h3>
 <div class="sect3">
-<h4 id="steps">2.1.1. Steps</h4>
+<h4 id="introduction-2"><a class="anchor" href="#introduction-2"></a>3.1.1. Introduction</h4>
+<div class="paragraph">
+<p>In the following, we&#8217;ll be trailing the <a href="#runtime-tutorial-steps">Steps</a> to
+finish the <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-walkthrough.html" target="_blank" rel="noopener">Tutorial – Publishing a custom runtime</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="runtime-tutorial-steps"><a class="anchor" href="#runtime-tutorial-steps"></a>3.1.2. Steps</h4>
 <div class="paragraph">
 <p>The steps that we’ll be following can be shown by running the following
 command:</p>
@@ -540,8 +574,8 @@ command:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>We can run each step manually or run all at once by typing the following
-command:</p>
+<p>We can run each step shown in the output of the command above manually
+or we can run all at once by typing the following command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -564,14 +598,14 @@ execute this command:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-use the option <code>-f</code> to force the execution if needed.
+Pass the option <code>-f</code> to force the execution if needed.
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect3">
-<h4 id="references">2.1.2. References</h4>
+<h4 id="references"><a class="anchor" href="#references"></a>3.1.3. References</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -598,9 +632,16 @@ use the option <code>-f</code> to force the execution if needed.
 </div>
 </div>
 <div class="sect2">
-<h3 id="lambda-with-kinesis">2.2. lambda-with-kinesis</h3>
+<h3 id="lambda-with-kinesis"><a class="anchor" href="#lambda-with-kinesis"></a>3.2. lambda-with-kinesis</h3>
 <div class="sect3">
-<h4 id="steps-2">2.2.1. Steps</h4>
+<h4 id="introduction-3"><a class="anchor" href="#introduction-3"></a>3.2.1. Introduction</h4>
+<div class="paragraph">
+<p>In the following, we&#8217;ll be trailing the <a href="#lambda-with-kinesis-steps">Steps</a> to
+finish the <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis-example.html" target="_blank" rel="noopener">Tutorial: Using AWS Lambda with Amazon Kinesis</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="lambda-with-kinesis-steps"><a class="anchor" href="#lambda-with-kinesis-steps"></a>3.2.2. Steps</h4>
 <div class="paragraph">
 <p>We can use the same scripts available in <a href="#runtime-tutorial">runtime-tutorial</a> with one
 single difference: first, we need to export a value to the variable
@@ -617,7 +658,7 @@ in the previous lab.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="references-2">2.2.2. References</h4>
+<h4 id="references-2"><a class="anchor" href="#references-2"></a>3.2.3. References</h4>
 <div class="ulist">
 <ul>
 <li>
