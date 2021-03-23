@@ -19,7 +19,7 @@ set-steps() {
 initialize-default-options() {
 	debug=${DEBUG:-false}
 	set_steps_called=false
-	steps=runtime-tutorial
+	steps=${steps:-runtime-tutorial}
 }
 
 after-process-cleanup-options() {
@@ -125,4 +125,5 @@ for-each-step() {
 		echo
 		(( ++count ))
 	done < <(grep -v -e '^#' -e '^$' "$steps_file")
+	! [ "$fn" = run-step ] || touch "$BASE_DIR"/.cleanup_needed
 }

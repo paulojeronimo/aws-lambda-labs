@@ -2,3 +2,7 @@
 # Blank lines or lines started with a '#' will be ignored
 
 delete-lambda-with-kinesis-dir.sh
+aws-iam-detach-role-policy.sh
+aws-iam-delete-role.sh
+aws-lambda-delete-function.sh
+aws-kinesis-delete-stream.sh

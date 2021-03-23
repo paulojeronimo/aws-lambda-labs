@@ -16,4 +16,3 @@ aws-iam-attach-role-policy.sh
 aws-lambda-create-function.sh
 aws-lambda-invoke.sh
 cat-response_txt.sh
-create-cleanup_needed-file.sh
