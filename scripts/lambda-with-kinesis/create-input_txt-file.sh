@@ -1,3 +1,5 @@
+message="Hello \"$USER\"! This is a message from lab lambda-with-kinesis at `date +%T`" &&
+message=`echo -n "$message" | base64` &&
 cat > input.txt <<EOF
 {
     "Records": [
@@ -6,7 +8,7 @@ cat > input.txt <<EOF
                 "kinesisSchemaVersion": "1.0",
                 "partitionKey": "1",
                 "sequenceNumber": "49590338271490256608559692538361571095921575989136588898",
-                "data": "SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==",
+                "data": "$message",
                 "approximateArrivalTimestamp": 1545084650.987
             },
             "eventSource": "aws:kinesis",

@@ -5,5 +5,7 @@ cd "$BASE_DIR"
 
 source ./common.sh
 
+before_process_options_fn=initialize-cleanup-options
+
 process-options "$@"
-for-each-step run-step
+process-cleanup

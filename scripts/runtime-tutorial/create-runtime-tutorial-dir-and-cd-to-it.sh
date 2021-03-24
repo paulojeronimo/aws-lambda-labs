@@ -1,1 +1,1 @@
-mkdir runtime-tutorial && cd $_
+mkdir -p build/runtime-tutorial && cd $_

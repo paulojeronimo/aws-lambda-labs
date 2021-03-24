@@ -1,7 +1,7 @@
 # This file sets the order in which the scripts will be executed
 # Blank lines or lines started with a '#' will be ignored
 
-delete-runtime-tutorial-dir.sh
 aws-iam-detach-role-policy.sh
 aws-iam-delete-role.sh
 aws-lambda-delete-function.sh
+delete-runtime-tutorial-dir.sh

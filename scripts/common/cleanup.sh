@@ -1,1 +1,1 @@
-./cleanup.sh
+./executor/cleanup.sh

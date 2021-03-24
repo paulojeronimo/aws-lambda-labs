@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source ./config.sh 2>&- || source ./config.sample.sh
+
 set-steps() {
 	local cleanup_steps=${cleanup_steps:-false}
 	[ "${1:-}" ] || {
@@ -8,7 +10,7 @@ set-steps() {
 	}
 	steps=$1
 	! $cleanup_steps || steps=$steps.cleanup
-	steps_file="$BASE_DIR"/steps/$steps.txt
+	steps_file="$LABS_DIR"/steps/$steps.txt
 	[ -f "$steps_file" ] || {
 		echo "File \"$steps_file\" was not found!"
 		exit 1
@@ -19,11 +21,18 @@ set-steps() {
 initialize-default-options() {
 	debug=${DEBUG:-false}
 	set_steps_called=false
-	steps=${steps:-runtime-tutorial}
+	steps=${steps:-$DEFAULT_STEPS}
+	steps_file="$LABS_DIR"/steps/$steps.txt
+	cd "$LABS_DIR"
+}
+
+after-process-default-options() {
+	echo -e "Steps file: $steps_file\n"
 }
 
 after-process-cleanup-options() {
 	$set_steps_called || set-steps $steps
+	after-process-default-options
 }
 
 initialize-cleanup-options() {
@@ -33,8 +42,8 @@ initialize-cleanup-options() {
 	cleanup_forced=false
 	cleanup_steps=true
 	exit_on_error=false
-	check_fn=check-cleanup-options
-	done_fn=after-process-cleanup-options
+	check_process_options_fn=check-cleanup-options
+	after_process_options_fn=after-process-cleanup-options
 }
 
 check-cleanup-options() {
@@ -57,24 +66,24 @@ check-default-options() {
 }
 
 process-options() {
-	local init_fn=${init_fn:-initialize-default-options}
-	local check_fn=${check_fn:-check-default-options}
-	local done_fn=${done_fn:-}
+	local before_process_options_fn=${before_process_options_fn:-initialize-default-options}
+	local check_process_options_fn=${check_process_options_fn:-check-default-options}
+	local after_process_options_fn=${after_process_options_fn:-after-process-default-options}
 
-	$init_fn
+	$before_process_options_fn
 	while [ "${1:-}" ] 
 	do
-		$check_fn "$@"
+		$check_process_options_fn "$@"
 		shift
 	done
-	! [ "$done_fn" ] || $done_fn
+	! [ "$after_process_options_fn" ] || $after_process_options_fn
 }
 
 process-cleanup() {
 	if $cleanup_forced || $cleanup_needed
 	then
-		for-each-step run-step
-		rm -f "$BASE_DIR"/.cleanup_needed
+		for-each-step perform-step
+		rm -f "$LABS_DIR"/.cleanup_needed
 	else
 		echo "Clean up is not needed!"
 	fi
@@ -85,27 +94,26 @@ print-step() {
 	local step=${step:-$2}
 
 	printf -- '---- Step %02d ----\n' $count
-	echo -n "$ "
-	cat "$BASE_DIR"/scripts/$steps/$step
+	cat "$LABS_DIR"/scripts/$steps/$step
 }
 
-run-step() {
+perform-step() {
 	local error=`mktemp`
 	local exit_on_error=${exit_on_error:-true}
 
 	print-step
-	if ! source "$BASE_DIR"/scripts/$steps/$step 2> $error
+	if ! source "$LABS_DIR"/scripts/$steps/$step 2> $error
 	then
 		cat $error
 		! $exit_on_error || exit 1
 	fi
-	sleep 1
+	sleep $SLEEP_TIME_BETWEEN_STEPS
 }
 
 for-each-step() {
 	local fn=${1:-}
-	local steps=${steps:-runtime-tutorial}
-	local steps_file=${steps_file:-"$BASE_DIR"/steps/$steps.txt}
+	local steps=${steps:-$DEFAULT_STEPS}
+	local steps_file=${steps_file:-"$LABS_DIR"/steps/$steps.txt}
 	local debug=${debug:-false}
 	local count=1
 
@@ -125,5 +133,5 @@ for-each-step() {
 		echo
 		(( ++count ))
 	done < <(grep -v -e '^#' -e '^$' "$steps_file")
-	! [ "$fn" = run-step ] || touch "$BASE_DIR"/.cleanup_needed
+	! [ "$fn" = perform-step ] || touch "$LABS_DIR"/.cleanup_needed
 }

@@ -1,3 +1,3 @@
 = AWS Lambda Labs
 
-https://paulojeronimo.com/aws-lambda-labs
+Read https://paulojeronimo.com/aws-lambda-labs.
