@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<meta name="author" content="Paulo Jerônimo &lt;pj@paulojeronimo.com&gt;, 2021-03-23 11:26:16 -0300">
+<meta name="author" content="Paulo Jerônimo &lt;pj@paulojeronimo.com&gt;, 2021-03-24 01:22:30 -0300">
 <title>AWS Lambda Labs</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -442,7 +442,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>AWS Lambda Labs</h1>
 <div class="details">
-<span id="author" class="author">Paulo Jerônimo &lt;pj@paulojeronimo.com&gt;, 2021-03-23 11:26:16 -0300</span><br>
+<span id="author" class="author">Paulo Jerônimo &lt;pj@paulojeronimo.com&gt;, 2021-03-24 01:22:30 -0300</span><br>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -513,9 +513,22 @@ $ echo $(brew --prefix)/bin/bash | sudo tee -a /private/etc/shells</pre>
 <p><a href="https://aws.amazon.com/cli/" target="_blank" rel="noopener">aws-cli</a> installed.</p>
 </li>
 <li>
-<p>A configured IAM user ID (12 digits number) inside a file called
-  <code>config.sh</code> (copy the file <a href="https://raw.githubusercontent.com/paulojeronimo/aws-lambda-labs/main/config.sample.sh" target="_blank" rel="noopener">config.sample.sh</a>
-to it and edit the <code>IAM</code> variable).</p>
+<p><a href="https://stedolan.github.io/jq/" target="_blank" rel="noopener">jq</a> installed.</p>
+</li>
+<li>
+<p>A configuration file (<code>config.sh</code> - create it using the file
+  <a href="https://raw.githubusercontent.com/paulojeronimo/aws-lambda-labs/main/config.sample.sh" target="_blank" rel="noopener">config.sample.sh</a>) defining values for the
+following variables:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>IAM</code>: an IAM user ID (12 digits number).</p>
+</li>
+<li>
+<p><code>awsRegion</code>: an AWS region.</p>
+</li>
+</ol>
+</div>
 </li>
 </ol>
 </div>
@@ -570,7 +583,7 @@ command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ ./show-steps.sh | less</pre>
+<pre>$ ./runtime/show-steps.sh | less</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -579,7 +592,7 @@ or we can run all at once by typing the following command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ ./run-all-steps.sh</pre>
+<pre>$ ./runtime/perform-steps.sh</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -588,7 +601,7 @@ execute this command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ ./cleanup.sh</pre>
+<pre>$ ./runtime/cleanup.sh</pre>
 </div>
 </div>
 <div class="admonitionblock note">
