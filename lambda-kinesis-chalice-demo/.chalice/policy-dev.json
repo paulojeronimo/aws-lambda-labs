@@ -1,0 +1,30 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:*:*:*",
+      "Effect": "Allow"
+    },
+    {
+      "Action": [
+        "kinesis:Get*",
+        "kinesis:ListStreams",
+        "kinesis:DescribeStream*"
+      ],
+      "Resource": "arn:aws:kinesis:*:*:stream/lambda-kinesis-chalice-demo-stream",
+      "Effect": "Allow"
+    },
+    {
+      "Action": [
+        "s3:*"
+      ],
+	  "Resource": "*",
+      "Effect": "Allow"
+    }
+  ]
+}

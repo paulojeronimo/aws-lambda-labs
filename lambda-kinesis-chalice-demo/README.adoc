@@ -1,0 +1,18 @@
+= Test script
+
+	$ python3 -m venv venv
+	$ source venv/bin/activate
+	$ pip3 install -r requirements.txt
+	$ ./deploy.sh
+	$ ./get-logs.sh # <- This will block your terminal session
+	$ # go to (or open) another terminal session (shell 2)
+	$ ./put-record.sh # <- And wait an ouput on shell 1
+	$ ./put-record.sh 'Hello again!' # <- and (again) wait for a new record on shell 1
+	$ ./delete.sh
+
+References:
+
+* https://github.com/aws/chalice
+* https://github.com/aws-samples/chalice-workshop
+* https://chalice-workshop.readthedocs.io/en/latest/
+* https://github.com/aws/chalice/issues/915
