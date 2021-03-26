@@ -4,7 +4,8 @@
 	$ ./get-logs.sh # <- This will block your terminal session
 	$ # go to (or open) another terminal session (shell 2)
 	$ ./put-record.sh # <- And wait an ouput on shell 1
-	$ ./put-record.sh 'Hello again!' # <- and (again) wait for a new record on shell 1
+	$ ./put-record.sh 02 'A custom message!' # <- will update the value defined in file 02.json
+	$ ./put-record.sh 12 # <- will return a error message because file 12.json is not in bucket
 	$ ./delete.sh # <- will delete the application from AWS
 
 Other local possible scripts tests:
