@@ -5,3 +5,4 @@ build
 /venv/
 .idea
 __pycache__
+/vendor/jq

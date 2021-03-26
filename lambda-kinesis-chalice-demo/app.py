@@ -13,7 +13,15 @@ s3_client = boto3.client('s3')
 
 
 def change_value_in_json_file(json_file, new_value):
+    stream = os.popen(f'./update-value.sh "{new_value}" < {json_file}')
+    output = stream.read().strip()
     app.log.debug(f'TODO: change the current value in "{json_file}" to "{new_value}" ...')
+    app.log.debug(f'Bash output: {output}')
+    return output
+
+
+def upload_result_to_s3():
+    pass  # TODO: fill this later
 
 
 @app.on_kinesis_record(stream=STREAM_NAME, starting_position='LATEST')
@@ -31,3 +39,4 @@ def handle_kinesis_record(event):
             return
         app.log.info(f'File "{json_file}" found!')
         change_value_in_json_file(tmp_json_file, new_value)
+        upload_result_to_s3()
