@@ -1,6 +1,7 @@
 {
   "version": "2.0",
   "app_name": "lambda-kinesis-chalice-demo",
+  "layers": [ "arn:aws:lambda:us-east-1:229248205759:layer:jq-layer:6" ],
   "stages": {
     "dev": {
       "autogen_policy": false,

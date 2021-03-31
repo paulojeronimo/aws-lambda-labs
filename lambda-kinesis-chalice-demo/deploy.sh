@@ -9,6 +9,8 @@ venv-setup() {
 	[ -d venv ] || {
 		echo "Creating the virtual environment (venv) ..."
 		python3 -m venv venv
+		echo "Upgrading pip ..."
+		pip3 install --upgrade pip
 		echo "Installing the Python requirements ..."
 		pip3 install -r requirements.txt
 	}
@@ -34,5 +36,5 @@ check-bin python3 pip3
 venv-setup
 venv-activate
 check-bin chalice
-./binary-dependencies-install.sh
+#./binary-dependencies-install.sh <- commented out since we are now using an AWS Lambda Layer (see the configuration in ./.chalice.config.json)
 chalice deploy

@@ -21,7 +21,11 @@ then
 		then
 			if key=$(jq -r .key <<< "$ouput") && [ $key != null ]
 			then
-				echo "$ouput" | tee /tmp/$key.updated.json
+				echo "$ouput" | \
+				# DEBUG code inserted:
+				jq -c ".jq=\"$(type -P jq)\"" | \
+				# production code:
+				tee /tmp/$key.updated.json
 			else
 				printf "$INVALID_JSON" "Key not found"
 			fi
@@ -33,7 +37,7 @@ then
 	fi
 elif [ -n "$new_value" ]
 then
-	echo "$new_value"
+	echo -e "No JSON input was provided!\nJust echoing the value provided: $new_value"
 else
 	echo "No JSON input and no value provided!"
 fi
