@@ -1,0 +1,61 @@
+= AWS Lambda Layer (jq example)
+
+== Introduction
+
+This is a AWS Lambda Layer example based on
+the code available in
+https://github.com/aws-samples/aws-lambda-layer-awscli
+
+== Create
+
+----
+$ make layer-all
+----
+
+== Test
+
+=== Local
+
+----
+$ cp main.sample.sh main.sh
+$ ./main.sh '{"instanceId":"i-12345"}'
+$ echo '{"instanceId":"i-12345"}' | ./main.sh
+----
+
+=== At AWS
+
+Create a role and the function:
+
+----
+$ make create-func-role
+$ # wait a few seconds ..
+$ make create-func
+----
+
+Invoke the function:
+
+----
+$ make invoke
+----
+
+Update the function and execute it again:
+
+----
+$ vim build/main.sh
+$ make update-func
+$ make invoke
+----
+
+== Clean up
+
+Local created files only:
+
+----
+$ make clean
+----
+
+Clean up all resources:
+
+----
+$ make clean-all
+----
